@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useWallet, useUnifiedWalletContext } from "@jup-ag/wallet-adapter";
-import { Connection, PublicKey } from "@solana/web3.js";
+import { Connection, PublicKey, Keypair } from "@solana/web3.js";
 import { useCurveConfig } from "@/hooks/useCurveConfig";
 import {
   prepareCreateConfigTx,
@@ -17,6 +17,7 @@ import {
   Copy,
   RefreshCw,
   PartyPopper,
+  Zap,
 } from "lucide-react";
 import { computeSwapQuote } from "@/lib/fee-calc";
 
@@ -37,6 +38,10 @@ export default function DeploySimulator() {
   const { publicKey, signTransaction, connected } = useWallet();
   const { setShowModal } = useUnifiedWalletContext();
   const { config } = useCurveConfig();
+
+  const [demoKeypair, setDemoKeypair] = useState<Keypair | null>(null);
+  const effectivePublicKey = publicKey || demoKeypair?.publicKey;
+  const effectiveConnected = connected || !!demoKeypair;
 
   const [isDeployingConfig, setIsDeployingConfig] = useState(false);
   const [deployedConfigKey, setDeployedConfigKey] = useState<string | null>(null);
@@ -73,7 +78,8 @@ export default function DeploySimulator() {
   };
 
   const handleDeployConfig = async () => {
-    if (!publicKey || !signTransaction) {
+    const activeKey = publicKey || demoKeypair?.publicKey;
+    if (!activeKey) {
       setShowModal(true);
       return;
     }
@@ -85,17 +91,22 @@ export default function DeploySimulator() {
 
       toast.info("Building Meteora DBC config transaction...");
       const { configPublicKey, transaction, configKeypair } =
-        await prepareCreateConfigTx(client, publicKey, config);
+        await prepareCreateConfigTx(client, activeKey, config);
 
       const { blockhash } = await connection.getLatestBlockhash("confirmed");
       transaction.recentBlockhash = blockhash;
-      transaction.feePayer = publicKey;
+      transaction.feePayer = activeKey;
 
       // Partial sign with config keypair
       transaction.partialSign(configKeypair);
 
-      toast.info("Requesting wallet signature...");
-      const signedTx = await signTransaction(transaction);
+      let signedTx = transaction;
+      if (demoKeypair) {
+        transaction.partialSign(demoKeypair);
+      } else if (signTransaction) {
+        toast.info("Requesting wallet signature...");
+        signedTx = await signTransaction(transaction);
+      }
 
       toast.info("Broadcasting config to Solana Devnet...");
       const rawTx = signedTx.serialize();
@@ -117,7 +128,8 @@ export default function DeploySimulator() {
   };
 
   const handleLaunchPool = async () => {
-    if (!publicKey || !signTransaction) {
+    const activeKey = publicKey || demoKeypair?.publicKey;
+    if (!activeKey) {
       setShowModal(true);
       return;
     }
@@ -135,7 +147,7 @@ export default function DeploySimulator() {
       const { poolAddress, baseMint, transaction, baseMintKeypair } =
         await prepareCreatePoolTx(
           client,
-          publicKey,
+          activeKey,
           new PublicKey(deployedConfigKey),
           config.name,
           config.symbol,
@@ -144,13 +156,18 @@ export default function DeploySimulator() {
 
       const { blockhash } = await connection.getLatestBlockhash("confirmed");
       transaction.recentBlockhash = blockhash;
-      transaction.feePayer = publicKey;
+      transaction.feePayer = activeKey;
 
       // Sign with base mint keypair
       transaction.partialSign(baseMintKeypair);
 
-      toast.info("Requesting wallet signature for Pool creation...");
-      const signedTx = await signTransaction(transaction);
+      let signedTx = transaction;
+      if (demoKeypair) {
+        transaction.partialSign(demoKeypair);
+      } else if (signTransaction) {
+        toast.info("Requesting wallet signature for Pool creation...");
+        signedTx = await signTransaction(transaction);
+      }
 
       const rawTx = signedTx.serialize();
       const txSig = await connection.sendRawTransaction(rawTx, {
@@ -228,38 +245,67 @@ export default function DeploySimulator() {
       </div>
 
       {/* Wallet Connection */}
-      {!connected ? (
-        <div className="rounded-lg bg-neutral-950 p-4 border border-neutral-800 text-center space-y-2.5">
+      {!effectiveConnected ? (
+        <div className="rounded-lg bg-neutral-950 p-4 border border-neutral-800 text-center space-y-3">
           <Wallet className="h-6 w-6 text-primary mx-auto" />
           <p className="text-xs text-neutral-300">
-            Connect a Solana Phantom or Solflare wallet to deploy on Devnet.
+            Connect Phantom or Solflare to deploy live on Solana Devnet.
           </p>
-          <button
-            type="button"
-            onClick={() => setShowModal(true)}
-            className="w-full rounded-lg bg-primary py-2 text-xs font-semibold text-white shadow-md hover:bg-primary/90 transition-all"
-          >
-            Connect Wallet
-          </button>
+          <div className="grid grid-cols-1 gap-2">
+            <button
+              type="button"
+              onClick={() => setShowModal(true)}
+              className="w-full rounded-lg bg-primary py-2 text-xs font-semibold text-white shadow-md hover:bg-primary/90 transition-all flex items-center justify-center gap-1.5"
+            >
+              <Wallet className="h-3.5 w-3.5" />
+              Connect Wallet
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                const kp = Keypair.generate();
+                setDemoKeypair(kp);
+                toast.success(`Connected Devnet Test Wallet: ${kp.publicKey.toBase58().slice(0, 8)}...`);
+              }}
+              className="w-full rounded-lg bg-neutral-900 hover:bg-neutral-800 text-neutral-300 py-1.5 text-xs font-medium border border-neutral-800 transition-all flex items-center justify-center gap-1.5"
+            >
+              <Zap className="h-3.5 w-3.5 text-amber-400" />
+              1-Click Devnet Wallet (No Extension)
+            </button>
+          </div>
         </div>
       ) : (
         <div className="rounded-lg bg-neutral-950 p-3 border border-neutral-800 flex items-center justify-between text-xs">
           <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-500" />
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="font-mono text-neutral-200">
-              {publicKey?.toBase58().slice(0, 4)}...
-              {publicKey?.toBase58().slice(-4)}
+              {demoKeypair ? "Devnet: " : ""}
+              {effectivePublicKey?.toBase58().slice(0, 4)}...
+              {effectivePublicKey?.toBase58().slice(-4)}
             </span>
           </div>
-          <a
-            href="https://faucet.solana.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-[11px] text-primary hover:underline flex items-center gap-1"
-          >
-            Devnet Faucet
-            <ExternalLink className="h-3 w-3" />
-          </a>
+          {demoKeypair ? (
+            <button
+              type="button"
+              onClick={() => {
+                setDemoKeypair(null);
+                toast.info("Disconnected Devnet Test Wallet");
+              }}
+              className="text-[11px] text-neutral-400 hover:text-neutral-200"
+            >
+              Disconnect
+            </button>
+          ) : (
+            <a
+              href="https://faucet.solana.com"
+              target="_blank"
+              rel="noreferrer"
+              className="text-[11px] text-primary hover:underline flex items-center gap-1"
+            >
+              Devnet Faucet
+              <ExternalLink className="h-3 w-3" />
+            </a>
+          )}
         </div>
       )}
 

@@ -3,7 +3,6 @@ import { Adapter, UnifiedWalletProvider } from '@jup-ag/wallet-adapter';
 import type { AppProps } from 'next/app';
 import { ThemeProvider, useTheme } from 'next-themes';
 import { Toaster } from 'sonner';
-import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { useMemo } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useWindowWidthListener } from '@/lib/device';
@@ -11,11 +10,7 @@ import { useWindowWidthListener } from '@/lib/device';
 function AppProviders({ Component, pageProps }: AppProps) {
   const { resolvedTheme } = useTheme();
 
-  const wallets: Adapter[] = useMemo(() => {
-    return [new PhantomWalletAdapter(), new SolflareWalletAdapter()].filter(
-      (item) => item && item.name && item.icon
-    ) as Adapter[];
-  }, []);
+  const wallets: Adapter[] = useMemo(() => [], []);
 
   const queryClient = useMemo(() => new QueryClient(), []);
 
@@ -28,15 +23,14 @@ function AppProviders({ Component, pageProps }: AppProps) {
       <UnifiedWalletProvider
         wallets={wallets}
         config={{
-          env: 'mainnet-beta',
+          env: 'devnet',
           autoConnect: true,
           metadata: {
-            name: 'UnifiedWallet',
-            description: 'UnifiedWallet',
-            url: 'https://jup.ag',
-            iconUrls: ['https://jup.ag/favicon.ico'],
+            name: 'CurveLab Studio',
+            description: 'Meteora Dynamic Bonding Curve Designer & Validator',
+            url: 'https://curvelab.app',
+            iconUrls: ['https://curvelab.app/favicon.ico'],
           },
-          // notificationCallback: WalletNotification,
           theme: walletTheme,
           lang: 'en',
         }}
