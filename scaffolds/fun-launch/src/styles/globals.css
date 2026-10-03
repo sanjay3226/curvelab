@@ -16,7 +16,7 @@
 :root {
   color-scheme: light;
 
-  --background: 251 252 254;
+  --background: 248 250 252;
   --foreground: 15 23 42;
 
   --neutral-50: 15 23 42;
@@ -34,26 +34,26 @@
   --neutral-925: 246 248 251;
   --neutral-950: 255 255 255;
 
-  --primary: 77 124 15;
-  --primary-200: 77 124 15;
-  --primary-300: 63 98 18;
-  --primary-400: 101 163 13;
-  --primary-500: 132 204 22;
-  --primary-600: 163 230 53;
-  --primary-700: 190 242 100;
-  --primary-800: 236 252 203;
-  --primary-900: 242 253 217;
-  --primary-950: 247 254 231;
+  --primary: 99 102 241;
+  --primary-200: 224 231 255;
+  --primary-300: 199 210 254;
+  --primary-400: 165 180 252;
+  --primary-500: 129 140 248;
+  --primary-600: 99 102 241;
+  --primary-700: 79 70 229;
+  --primary-800: 67 56 202;
+  --primary-900: 49 46 129;
+  --primary-950: 30 27 75;
 
-  --emerald: 0 162 114;
-  --rose: 224 30 104;
-  --amber: 225 113 0;
+  --emerald: 16 185 129;
+  --rose: 244 63 94;
+  --amber: 245 158 11;
 
-  /* Jupiter Plugin color theme (comma-separated RGB, per Jupiter docs) */
-  --jupiter-plugin-primary: 77, 124, 15;
+  /* Jupiter Plugin color theme */
+  --jupiter-plugin-primary: 99, 102, 241;
   --jupiter-plugin-background: 255, 255, 255;
   --jupiter-plugin-primaryText: 15, 23, 42;
-  --jupiter-plugin-warning: 225, 113, 0;
+  --jupiter-plugin-warning: 245, 158, 11;
   --jupiter-plugin-interactive: 226, 232, 240;
   --jupiter-plugin-module: 246, 248, 251;
 }
@@ -61,46 +61,47 @@
 .dark {
   color-scheme: dark;
 
-  --background: 5 7 10;
-  --foreground: 248 250 252;
+  --background: 10 12 16;
+  --foreground: 241 245 249;
 
   --neutral-50: 248 250 252;
   --neutral-100: 241 245 249;
   --neutral-200: 226 232 240;
-  --neutral-300: 202 213 226;
-  --neutral-400: 144 161 185;
-  --neutral-500: 103 119 142;
-  --neutral-600: 73 86 104;
-  --neutral-700: 49 65 88;
-  --neutral-750: 37 52 70;
-  --neutral-800: 33 42 54;
-  --neutral-850: 25 36 46;
-  --neutral-900: 21 30 40;
-  --neutral-925: 17 25 34;
-  --neutral-950: 11 14 19;
+  --neutral-300: 203 213 228;
+  --neutral-400: 160 174 200;
+  --neutral-500: 125 142 173;
+  --neutral-600: 90 106 136;
+  --neutral-700: 64 78 104;
+  --neutral-750: 46 58 78;
+  --neutral-800: 36 45 61;
+  --neutral-850: 28 35 48;
+  --neutral-900: 22 28 38;
+  --neutral-925: 17 21 29;
+  --neutral-950: 13 16 22;
 
-  --primary: 199 242 132;
-  --primary-200: 199 242 132;
-  --primary-300: 161 197 110;
-  --primary-400: 105 132 83;
-  --primary-500: 65 83 55;
-  --primary-600: 46 60 44;
-  --primary-700: 27 38 33;
-  --primary-800: 21 31 32;
-  --primary-900: 18 26 28;
-  --primary-950: 12 20 24;
+  /* Premium Electric Indigo & Cyan accent */
+  --primary: 129 140 248;
+  --primary-200: 224 231 255;
+  --primary-300: 199 210 254;
+  --primary-400: 165 180 252;
+  --primary-500: 129 140 248;
+  --primary-600: 99 102 241;
+  --primary-700: 79 70 229;
+  --primary-800: 67 56 202;
+  --primary-900: 49 46 129;
+  --primary-950: 30 27 75;
 
-  --emerald: 60 227 171;
-  --rose: 242 54 116;
-  --amber: 255 185 0;
+  --emerald: 52 211 153;
+  --rose: 251 113 133;
+  --amber: 251 191 36;
 
-  /* Jupiter Plugin color theme (comma-separated RGB, per Jupiter docs) */
-  --jupiter-plugin-primary: 199, 242, 132;
-  --jupiter-plugin-background: 11, 14, 19;
-  --jupiter-plugin-primaryText: 248, 250, 252;
-  --jupiter-plugin-warning: 255, 185, 0;
-  --jupiter-plugin-interactive: 33, 42, 54;
-  --jupiter-plugin-module: 17, 25, 34;
+  /* Jupiter Plugin color theme */
+  --jupiter-plugin-primary: 129, 140, 248;
+  --jupiter-plugin-background: 13, 16, 22;
+  --jupiter-plugin-primaryText: 241, 245, 249;
+  --jupiter-plugin-warning: 251, 191, 36;
+  --jupiter-plugin-interactive: 36, 45, 61;
+  --jupiter-plugin-module: 22, 28, 38;
 }
 
 body {

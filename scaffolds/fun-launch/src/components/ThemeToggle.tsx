@@ -8,10 +8,23 @@ type ThemeToggleProps = {
 
 export const ThemeToggle = ({ className }: ThemeToggleProps) => {
   const { resolvedTheme, setTheme } = useTheme();
-  // Only render the icon after mount to avoid a hydration mismatch,
-  // since the resolved theme is unknown during SSR.
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        aria-label="Toggle theme"
+        className={cn(
+          'flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-neutral-800 text-neutral-400',
+          className
+        )}
+      >
+        <span className="h-[1.125rem] w-[1.125rem]" />
+      </button>
+    );
+  }
 
   const isDark = resolvedTheme === 'dark';
 
@@ -27,16 +40,12 @@ export const ThemeToggle = ({ className }: ThemeToggleProps) => {
         className
       )}
     >
-      {mounted ? (
-        <span
-          className={cn('iconify h-[1.125rem] w-[1.125rem]', {
-            'ph--moon-bold': isDark,
-            'ph--sun-bold': !isDark,
-          })}
-        />
-      ) : (
-        <span className="h-[1.125rem] w-[1.125rem]" />
-      )}
+      <span
+        className={cn('iconify h-[1.125rem] w-[1.125rem]', {
+          'ph--moon-bold': isDark,
+          'ph--sun-bold': !isDark,
+        })}
+      />
     </button>
   );
 };

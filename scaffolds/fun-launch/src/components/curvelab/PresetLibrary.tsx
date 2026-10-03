@@ -20,7 +20,7 @@ export default function PresetLibrary() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-1 gap-2">
         {BUILTIN_PRESETS.map((preset: CurvePreset) => {
           const isActive = activePresetId === preset.id;
           return (

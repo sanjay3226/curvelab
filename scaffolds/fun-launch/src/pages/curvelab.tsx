@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import Header from "@/components/Header";
 import CurveChart from "@/components/curvelab/CurveChart";
@@ -17,9 +17,11 @@ import { Beaker, Cpu } from "lucide-react";
 
 export default function CurveLabPage() {
   const { setConfig } = useCurveConfig();
+  const [mounted, setMounted] = useState(false);
 
   // Load preset from URL hash if present
   useEffect(() => {
+    setMounted(true);
     const loaded = decodeCurveFromURL();
     if (loaded) {
       setConfig(loaded);
@@ -77,7 +79,15 @@ export default function CurveLabPage() {
 
         {/* Main 3-Column Studio Canvas */}
         <main className="mx-auto max-w-7xl px-4 py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {!mounted ? (
+            <div className="flex h-96 items-center justify-center rounded-2xl border border-neutral-800/80 bg-neutral-900/30">
+              <div className="flex items-center gap-3 text-neutral-400">
+                <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+                <span className="text-sm font-medium">Initializing CurveLab Studio...</span>
+              </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Left Column: Curve Configuration Inputs (4 cols) */}
             <div className="lg:col-span-4 space-y-5">
               <TokenParams />
@@ -99,8 +109,9 @@ export default function CurveLabPage() {
               <DeploySimulator />
             </div>
           </div>
-        </main>
-      </div>
+        )}
+      </main>
+    </div>
     </>
   );
 }
