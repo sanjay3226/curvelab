@@ -1,12 +1,22 @@
-# 🧪 CurveLab — Visual Bonding Curve Studio & Pre-Flight Validator for Meteora DBC
+﻿# 🧪 CurveLab — Visual Bonding Curve Studio & Pre-Flight Validator for Meteora DBC
 
-> **The definitive design studio, financial analytics engine, and on-chain validator for Meteora Dynamic Bonding Curves on Solana.**
+> **The definitive visual design studio, financial analytics engine, and on-chain validator for Meteora Dynamic Bonding Curves on Solana.**
 
-[![Solana](https://img.shields.io/badge/Solana-Devnet%20%2F%20Mainnet-14F195?logo=solana&logoColor=white)](https://solana.com)
-[![Meteora DBC](https://img.shields.io/badge/Meteora-DBC%20%26%20DAMM%20v2-FE4A60)](https://meteora.ag)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Next.js 15](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Live App](https://img.shields.io/badge/Live%20Demo-curvelab--beta.vercel.app-14F195?style=for-the-badge&logo=vercel&logoColor=white)](https://curvelab-beta.vercel.app/)
+[![Watch Demo](https://img.shields.io/badge/YouTube-Watch%20Demo%20(2%20Min)-red?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/Cmcw-5n8sv0)
+[![Solana](https://img.shields.io/badge/Solana-Devnet%20%2F%20Mainnet-black?style=for-the-badge&logo=solana&logoColor=white)](https://solana.com)
+[![Meteora DBC](https://img.shields.io/badge/Meteora-DBC%20%26%20DAMM%20v2-FE4A60?style=for-the-badge)](https://meteora.ag)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+---
+
+## 📺 Video Demo Walkthrough
+
+[![CurveLab Studio Demo](https://img.shields.io/badge/▶️_Watch_Demo_Video-Click_Here-red?style=flat-square&logo=youtube)](https://youtu.be/Cmcw-5n8sv0)
+
+Watch the 2-minute sovereign walkthrough showing wallet connection, 6 presets, multi-segment mathematical curve projection, 100/100 pre-flight validation, in-browser devnet swap simulation, and 1-click Rust Anchor CPI code export:
+
+👉 **[Watch on YouTube](https://youtu.be/Cmcw-5n8sv0)**
 
 ---
 
@@ -18,7 +28,7 @@
 
 ---
 
-## 💡 The Problem
+## ⚠️ The Problem
 
 Meteora's Dynamic Bonding Curve (DBC) is the most powerful primitive in DeFi, allowing protocols to design custom multi-segment bonding curves, exponential fee decay, and automated migration into Meteora DAMM v2 concentrated liquidity pools.
 
@@ -30,54 +40,25 @@ However, building custom DBC pools today requires:
 
 ---
 
-## 🚀 The Solution: CurveLab
+## ⚡ The Solution: CurveLab
 
 **CurveLab** is an all-in-one visual studio and engineering workstation that turns bonding curve design into an intuitive, mathematically verified experience:
 
-- 📊 **Visual Multi-Segment Curve Editor**: Interactively design piecewise-linear or piecewise-constant bonding curves. Drag or input price checkpoints and watch real-time market cap and token allocation charts update.
+- 📈 **Visual Multi-Segment Curve Editor**: Interactively design piecewise-linear or piecewise-constant bonding curves. Drag or input price checkpoints and watch real-time market cap and token allocation charts update.
 - 🛡️ **Automated Pre-Flight Protocol Validator**: In-browser static and mathematical verification that checks for price monotonicity, invariant balance, rug-pull immunity (100% lock enforcement), and computes an **MEV Bot Resistance Score (0–100)**.
-- ⚡ **Dynamic Swap Simulator & DAMM v2 Graduation Engine**: Test buy and sell swaps against the exact bonding curve math. Watch real-time price impact, dynamic fee calculation, and track progress toward automatic migration into Meteora DAMM v2.
-- 🧬 **6 Battle-Tested Presets**: One-click configurations for every launch archetype:
+- 🧪 **Dynamic Swap Simulator & DAMM v2 Graduation Engine**: Test buy and sell swaps against the exact bonding curve math. Watch real-time price impact, dynamic fee calculation, and track progress toward automatic migration into Meteora DAMM v2.
+- 🗂️ **6 Battle-Tested Presets**: One-click configurations for every launch archetype:
   - **Standard Pump**: Low starting price, steady escalation, reliable DAMM v2 graduation.
   - **Anti-Sniper Fair Launch**: Flat early segment with high initial fees that decay to punish MEV snipers.
   - **Exponential Liquidity**: Heavy liquidity at graduation to minimize post-migration volatility.
   - **Flat Stable Growth**: Low price delta designed for stable tokens or utility tokens.
   - **High-Tension Squeeze**: Aggressive exponential price ramp rewarding early diamond hands.
   - **Whale Shield**: Concentrated liquidity distributed evenly across segments to prevent single-buyer dominance.
-- 🌐 **Multi-Quote Currency Flexibility**: Launch with **WSOL** (9 decimals), **USDC** (6 decimals), or **USDG** (Global Dollar, 6 decimals).
-- 💻 **Production Code Exporter**: Export verified parameters directly into:
+- 💵 **Multi-Quote Currency Flexibility**: Launch with **WSOL** (9 decimals), **USDC** (6 decimals), or **USDG** (Global Dollar, 6 decimals).
+- 🦀 **Production Code Exporter**: Export verified parameters directly into:
   - Ready-to-execute **TypeScript SDK** scripts (`@meteora-ag/dynamic-bonding-curve-sdk`).
   - Standard **JSON** configuration files for CI/CD pipelines.
   - Native **Rust / Anchor CPI** snippets for on-chain protocol builders.
-
----
-
-## 🏗️ Architecture & Core Components
-
-```
-curvelab/
-├── scaffolds/fun-launch/
-│   ├── src/
-│   │   ├── components/curvelab/
-│   │   │   ├── CurveChart.tsx          # Dual-axis visual curve, MCAP, & Segment table
-│   │   │   ├── PreFlightValidator.tsx  # Protocol assertion checks & MEV scoring
-│   │   │   ├── DeploySimulator.tsx     # Dynamic swap simulator & DAMM v2 progress
-│   │   │   ├── TokenParams.tsx         # Token metadata, decimals, & quote asset
-│   │   │   ├── CurveSegments.tsx       # Segment checkpoints & liquidity weights
-│   │   │   ├── FeeScheduler.tsx        # Dynamic fee decay & scheduler controls
-│   │   │   ├── MigrationSettings.tsx   # DAMM v2 fee split & permanent lock setup
-│   │   │   ├── Presets.tsx             # 6 one-click curve presets
-│   │   │   └── CodeExporter.tsx        # TS SDK, JSON, & Rust Anchor generator
-│   │   ├── lib/
-│   │   │   ├── validator.ts            # Mathematical & security invariant assertions
-│   │   │   ├── fee-calc.ts             # Segment analytics, quote math & swap simulator
-│   │   │   ├── curve-builder.ts        # Meteora DBC SDK configuration builder
-│   │   │   └── code-gen.ts             # Code generation engines
-│   │   ├── types/
-│   │   │   └── curve-config.ts         # TypeScript types for CurveLab configs
-│   │   └── pages/
-│   │       └── curvelab.tsx            # Main Studio workspace layout
-```
 
 ---
 
@@ -105,7 +86,7 @@ CurveLab enforces the strict on-chain invariants required by the Meteora Dynamic
 
 ---
 
-## ⚡ Quickstart
+## 🚀 Quickstart
 
 ### Prerequisites
 - Node.js >= 20.0.0
@@ -143,10 +124,6 @@ pnpm --filter fun-launch build
 Production build generates a fully optimized, statically exported application (`/curvelab` static page at ~237 kB).
 
 ---
-
-## 🤝 Contributing
-
-Pull requests and feedback are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
 ## 📄 License
 
