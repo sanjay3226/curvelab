@@ -45,7 +45,7 @@ export default function PantaPredictionArena() {
     metadata: {
       bondingCurveSymbol: config.symbol,
       graduationThresholdSol: config.graduationThresholdSol || 85,
-      curveLabPreset: config.presetName || "Custom",
+      curveName: config.name || "Custom Curve",
     },
   };
 

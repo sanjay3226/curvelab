@@ -15,7 +15,7 @@ import PantaPredictionArena from "@/components/curvelab/PantaPredictionArena";
 import { useCurveConfig } from "@/hooks/useCurveConfig";
 import { decodeCurveFromURL } from "@/lib/url-codec";
 import { toast } from "sonner";
-import { Beaker, Cpu, Radio, Scale, Sparkles } from "lucide-react";
+import { Beaker, Cpu, Radio, Scale, Sparkles, ExternalLink } from "lucide-react";
 
 export default function CurveLabPage() {
   const { setConfig } = useCurveConfig();
@@ -39,6 +39,12 @@ export default function CurveLabPage() {
           name="description"
           content="Visual Bonding Curve Designer, Anti-Sniper Fee Scheduler, Solami Yellowstone gRPC Telemetry & Panta Prediction Markets for Meteora DBC."
         />
+        <meta property="og:title" content="CurveLab Studio — Visual Bonding Curve Architecture" />
+        <meta property="og:description" content="Visual Bonding Curve Designer, Anti-Sniper Fee Scheduler, Solami Yellowstone gRPC Telemetry & Panta Prediction Markets for Meteora DBC." />
+        <meta property="og:image" content="/curvelab-logo.jpg" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="/curvelab-logo.jpg" />
       </Head>
 
       <div className="min-h-screen bg-neutral-950 text-foreground">
@@ -49,8 +55,12 @@ export default function CurveLabPage() {
         <div className="border-b border-neutral-800/80 bg-neutral-900/40 px-4 py-3 backdrop-blur-sm">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-tr from-primary to-indigo-500 shadow-md shadow-primary/20">
-                <Beaker className="h-5 w-5 text-white" />
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-xl border border-cyan-500/40 shadow-lg shadow-cyan-500/20">
+                <img
+                  src="/curvelab-logo.jpg"
+                  alt="CurveLab Studio"
+                  className="h-full w-full object-cover"
+                />
               </div>
               <div>
                 <div className="flex items-center flex-wrap gap-2">
@@ -79,10 +89,17 @@ export default function CurveLabPage() {
             </div>
 
             <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
-              <div className="flex items-center gap-1.5 rounded-lg bg-neutral-900 px-2.5 py-1 border border-neutral-800">
-                <Cpu className="h-3.5 w-3.5 text-primary" />
+              <a
+                href="https://solscan.io/account/dbcij3LWVpC45pQJg8q7m11x8AghuL4H9495j9z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 rounded-lg bg-neutral-900 hover:bg-neutral-850 px-2.5 py-1 border border-neutral-800 text-neutral-300 hover:text-cyan-400 transition-colors"
+                title="View Meteora DBC Program on Solscan"
+              >
+                <Cpu className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Program: dbcij3LW...</span>
-              </div>
+                <ExternalLink className="h-3 w-3 text-neutral-500" />
+              </a>
             </div>
           </div>
         </div>

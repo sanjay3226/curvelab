@@ -1,4 +1,8 @@
-# 🧪 CurveLab — Visual Bonding Curve Studio & Pre-Flight Validator for Meteora DBC
+<p align="center">
+  <img src="./assets/curvelab-logo-neon.jpg" width="128" height="128" alt="CurveLab Studio" style="border-radius: 24px;" />
+</p>
+
+# CurveLab Studio — Visual Bonding Curve Architecture & Validator for Meteora DBC
 
 > **The definitive visual design studio, financial analytics engine, and on-chain validator for Meteora Dynamic Bonding Curves on Solana.**
 

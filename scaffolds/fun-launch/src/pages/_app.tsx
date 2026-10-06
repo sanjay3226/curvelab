@@ -29,7 +29,7 @@ function AppProviders({ Component, pageProps }: AppProps) {
             name: 'CurveLab Studio',
             description: 'Meteora Dynamic Bonding Curve Designer & Validator',
             url: 'https://curvelab.app',
-            iconUrls: ['https://curvelab.app/favicon.ico'],
+            iconUrls: ['/curvelab-logo.jpg'],
           },
           theme: walletTheme,
           lang: 'en',
