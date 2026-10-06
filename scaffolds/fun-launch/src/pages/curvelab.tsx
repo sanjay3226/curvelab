@@ -10,10 +10,12 @@ import PresetLibrary from "@/components/curvelab/PresetLibrary";
 import DeploySimulator from "@/components/curvelab/DeploySimulator";
 import CodeExporter from "@/components/curvelab/CodeExporter";
 import PreFlightValidator from "@/components/curvelab/PreFlightValidator";
+import SolamiTelemetry from "@/components/curvelab/SolamiTelemetry";
+import PantaPredictionArena from "@/components/curvelab/PantaPredictionArena";
 import { useCurveConfig } from "@/hooks/useCurveConfig";
 import { decodeCurveFromURL } from "@/lib/url-codec";
 import { toast } from "sonner";
-import { Beaker, Cpu } from "lucide-react";
+import { Beaker, Cpu, Radio, Scale, Sparkles } from "lucide-react";
 
 export default function CurveLabPage() {
   const { setConfig } = useCurveConfig();
@@ -32,10 +34,10 @@ export default function CurveLabPage() {
   return (
     <>
       <Head>
-        <title>CurveLab — Meteora Dynamic Bonding Curve Studio & Simulator</title>
+        <title>CurveLab — Meteora DBC Visual Studio, Solami Telemetry & Panta Prediction Arena</title>
         <meta
           name="description"
-          content="Visual Bonding Curve Designer, Anti-Sniper Fee Scheduler, DAMM v2 Migration Planner & Live Devnet Simulator for Meteora DBC."
+          content="Visual Bonding Curve Designer, Anti-Sniper Fee Scheduler, Solami Yellowstone gRPC Telemetry & Panta Prediction Markets for Meteora DBC."
         />
       </Head>
 
@@ -51,7 +53,7 @@ export default function CurveLabPage() {
                 <Beaker className="h-5 w-5 text-white" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center flex-wrap gap-2">
                   <h1 className="text-base font-bold text-neutral-100 tracking-tight">
                     CurveLab Studio
                   </h1>
@@ -61,9 +63,17 @@ export default function CurveLabPage() {
                   <span className="rounded-full bg-indigo-500/15 border border-indigo-500/30 px-2 py-0.5 text-[10px] font-semibold text-indigo-400">
                     DAMM v2
                   </span>
+                  <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-300 flex items-center gap-1">
+                    <Radio className="h-2.5 w-2.5 animate-pulse" />
+                    Solami Mirage
+                  </span>
+                  <span className="rounded-full bg-purple-500/15 border border-purple-500/30 px-2 py-0.5 text-[10px] font-semibold text-purple-300 flex items-center gap-1">
+                    <Scale className="h-2.5 w-2.5" />
+                    Panta Markets
+                  </span>
                 </div>
                 <p className="text-xs text-neutral-400">
-                  Design custom bonding curves, simulate anti-sniper fee decay, and launch with zero manual Rust structs.
+                  Design custom bonding curves, stream real-time Solami telemetry, predict graduation with Panta API, and export production code.
                 </p>
               </div>
             </div>
@@ -88,30 +98,32 @@ export default function CurveLabPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            {/* Left Column: Curve Configuration Inputs (4 cols) */}
-            <div className="lg:col-span-4 space-y-5">
-              <TokenParams />
-              <CurveDesigner />
-              <FeeDesigner />
-              <MigrationDesigner />
-            </div>
+              {/* Left Column: Curve Configuration Inputs (4 cols) */}
+              <div className="lg:col-span-4 space-y-5">
+                <TokenParams />
+                <CurveDesigner />
+                <FeeDesigner />
+                <MigrationDesigner />
+              </div>
 
-            {/* Middle Column: Interactive Charts, Pre-Flight Validator & Exporter (5 cols) */}
-            <div className="lg:col-span-5 space-y-5">
-              <CurveChart />
-              <PreFlightValidator />
-              <CodeExporter />
-            </div>
+              {/* Middle Column: Interactive Charts, Pre-Flight Validator, Code Exporter & Solami Telemetry (5 cols) */}
+              <div className="lg:col-span-5 space-y-5">
+                <CurveChart />
+                <PreFlightValidator />
+                <CodeExporter />
+                <SolamiTelemetry />
+              </div>
 
-            {/* Right Column: Presets & Live Simulation (3 cols) */}
-            <div className="lg:col-span-3 space-y-5">
-              <PresetLibrary />
-              <DeploySimulator />
+              {/* Right Column: Presets, Live Simulation & Panta Prediction Arena (3 cols) */}
+              <div className="lg:col-span-3 space-y-5">
+                <PresetLibrary />
+                <DeploySimulator />
+                <PantaPredictionArena />
+              </div>
             </div>
-          </div>
-        )}
-      </main>
-    </div>
+          )}
+        </main>
+      </div>
     </>
   );
 }

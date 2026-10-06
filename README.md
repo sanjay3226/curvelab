@@ -1,4 +1,4 @@
-﻿# 🧪 CurveLab — Visual Bonding Curve Studio & Pre-Flight Validator for Meteora DBC
+# 🧪 CurveLab — Visual Bonding Curve Studio & Pre-Flight Validator for Meteora DBC
 
 > **The definitive visual design studio, financial analytics engine, and on-chain validator for Meteora Dynamic Bonding Curves on Solana.**
 
@@ -55,8 +55,11 @@ However, building custom DBC pools today requires:
   - **High-Tension Squeeze**: Aggressive exponential price ramp rewarding early diamond hands.
   - **Whale Shield**: Concentrated liquidity distributed evenly across segments to prevent single-buyer dominance.
 - 💵 **Multi-Quote Currency Flexibility**: Launch with **WSOL** (9 decimals), **USDC** (6 decimals), or **USDG** (Global Dollar, 6 decimals).
+- 📡 **Solami Real-Time Telemetry & Beam Routing**: Live pool account streaming via Solami Mirage (Yellowstone gRPC WebSocket firehose) and high-speed transaction landing via Solami Beam.
+- 🔮 **Panta Prediction Market Arena**: Instant binary prediction market integration powered by Panta API (`docs.panta.market`) to trade and deploy DAMM v2 graduation odds (*"Will $TOKEN graduate in 24h?"*).
 - 🦀 **Production Code Exporter**: Export verified parameters directly into:
   - Ready-to-execute **TypeScript SDK** scripts (`@meteora-ag/dynamic-bonding-curve-sdk`).
+  - High-speed **Solami Beam** execution scripts.
   - Standard **JSON** configuration files for CI/CD pipelines.
   - Native **Rust / Anchor CPI** snippets for on-chain protocol builders.
 
