@@ -17,7 +17,8 @@ import { CurveLabConfig } from "@/types/curve-config";
 
 export function buildSDKCurveConfig(cfg: CurveLabConfig): ConfigParameters {
   const tokenBaseDecimal = cfg.tokenDecimals;
-  const tokenQuoteDecimal = cfg.quoteAsset === "WSOL" ? 9 : 6; // WSOL is 9 decimals, USDC/USDG are 6
+  const quote = cfg.quoteAsset ?? cfg.quoteToken ?? "WSOL";
+  const tokenQuoteDecimal = quote === "WSOL" ? 9 : 6; // WSOL is 9 decimals, USDC/USDG are 6
 
   // Convert human-readable price checkpoints into SDK sqrtPrices
   const sqrtPrices = cfg.sqrtPriceCheckpoints.map((p) =>
